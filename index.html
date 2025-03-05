@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ByteMarket</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="https://kit.fontawesome.com/e5e14bbee1.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="navbar-container">
+            <div class="logo">
+                <h1>ByteMarket</h1>
+            </div>
+            <div class="search-container">
+                <input type="search" placeholder="Search for something...">
+                <button class="search-button"><i class="fa-solid fa-search"></i></button>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="cart.html" title="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="nav-text">Cart</span></a></li>
+                    <li><a href="account.html" title="Account"><i class="fa-solid fa-circle-user"></i><span class="nav-text">Account</span></a></li>
+                    <li><a href="/about" title="About"><i class="fa-solid fa-circle-info"></i><span class="nav-text">About</span></a></li>
+                </ul>
+            </nav>
+            <!-- For Mobile Responsiveness -->
+            <button class="hamburger-menu" aria-label="Toggle menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        <section class="categories">
+            <div class="categories-container">
+                <h3>Categories</h3>
+                <div class="placeholder-categories">
+                    <div class="placeholder-category"></div>
+                    <div class="placeholder-category"></div>
+                    <div class="placeholder-category"></div>
+                    <div class="placeholder-category"></div>
+                </div>
+            </div>
+        </section>
+        <!-- Placeholder content to demonstrate scrolling -->
+        <section class="products">
+            <div class="products-container">
+                <h3>Featured Products</h3>
+                <div class="placeholder-products">
+                    <div class="placeholder-product"></div>
+                    <div class="placeholder-product"></div>
+                    <div class="placeholder-product"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+
+    </footer>
+
+    <script>
+        // JavaScript for hamburger menu toggle for mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger-menu');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+                
+                // Accessibility - update aria-expanded attribute
+                const expanded = navMenu.classList.contains('active');
+                hamburger.setAttribute('aria-expanded', expanded);
+            });
+        });
+    </script>
+</body>
+</html>
