@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart - ByteMarket</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script
+      src="https://kit.fontawesome.com/e5e14bbee1.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <div class="navbar-container">
+        <div class="logo">
+          <h1>ByteMarket</h1>
+        </div>
+        <div class="search-container">
+          <input type="search" placeholder="Search for something..." />
+          <button class="search-button">
+            <i class="fa-solid fa-search"></i>
+          </button>
+        </div>
+        <nav class="nav-menu">
+          <ul>
+            <li>
+              <a href="index.html" title="Home">
+                <i class="fa-solid fa-house"></i>
+                <span class="nav-text">Home</span>
+              </a>
+            </li>
+            <li>
+              <a href="cart.html" title="Cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="nav-text"
+                  >Cart (<span id="cart-count">0</span>)</span
+                >
+              </a>
+            </li>
+            <li>
+              <a href="account.html" title="Account">
+                <i class="fa-solid fa-circle-user"></i>
+                <span class="nav-text">Account</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Cart Section -->
+    <main class="cart-container">
+      <h2>Your Shopping Cart</h2>
+      <div class="cart-items" id="cart-items"></div>
+
+      <!-- Checkout Button -->
+      <button id="checkout-button" class="checkout-button" disabled>
+        Checkout
+      </button>
+    </main>
+
+    <footer></footer>
+
+    <script defer src="scripts/hamburger.js"></script>
+    <script defer src="scripts/auth.js"></script>
+    <script defer src="scripts/cart.js"></script>
+  </body>
+</html>
