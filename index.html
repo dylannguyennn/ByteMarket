@@ -22,28 +22,37 @@
             <i class="fa-solid fa-search"></i>
           </button>
         </div>
-        <nav class="nav-menu">
+
+        <!-- Navigation for Signed-Out Users -->
+        <div class="nav-buttons" id="signed-out-nav">
+          <a href="login.html" class="nav-button">Sign In</a>
+          <a href="register.html" class="nav-button">Register</a>
+        </div>
+
+        <!-- Navigation for Signed-In Users -->
+        <div class="nav-menu" id="signed-in-nav" style="display: none">
           <ul>
             <li>
-              <a href="cart.html" title="Cart"
-                ><i class="fa-solid fa-cart-shopping"></i
-                ><span class="nav-text">Cart</span></a
-              >
+              <a href="cart.html" title="Cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="nav-text">Cart</span>
+              </a>
             </li>
             <li>
-              <a href="account.html" title="Account"
-                ><i class="fa-solid fa-circle-user"></i
-                ><span class="nav-text">Account</span></a
-              >
+              <a href="account.html" title="Account">
+                <i class="fa-solid fa-circle-user"></i>
+                <span class="nav-text">Account</span>
+              </a>
             </li>
             <li>
-              <a href="/about" title="About"
-                ><i class="fa-solid fa-circle-info"></i
-                ><span class="nav-text">About</span></a
-              >
+              <a href="#" id="logout-btn" title="Logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span class="nav-text">Logout</span>
+              </a>
             </li>
           </ul>
-        </nav>
+        </div>
+
         <!-- For Mobile Responsiveness -->
         <button class="hamburger-menu" aria-label="Toggle menu">
           <span class="bar"></span>
@@ -66,6 +75,7 @@
           </div>
         </div>
       </section>
+
       <!-- Placeholder content to demonstrate scrolling -->
       <section class="products">
         <div class="products-container">
@@ -78,23 +88,11 @@
         </div>
       </section>
     </main>
+
     <footer></footer>
 
-    <script>
-      // JavaScript for hamburger menu toggle for mobile
-      document.addEventListener("DOMContentLoaded", function () {
-        const hamburger = document.querySelector(".hamburger-menu");
-        const navMenu = document.querySelector(".nav-menu");
-
-        hamburger.addEventListener("click", function () {
-          navMenu.classList.toggle("active");
-          hamburger.classList.toggle("active");
-
-          // Accessibility - update aria-expanded attribute
-          const expanded = navMenu.classList.contains("active");
-          hamburger.setAttribute("aria-expanded", expanded);
-        });
-      });
-    </script>
+    <!-- External JavaScript Files -->
+    <script defer src="scripts/hamburger.js"></script>
+    <script defer src="scripts/auth.js"></script>
   </body>
 </html>

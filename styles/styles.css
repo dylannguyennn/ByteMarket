@@ -116,6 +116,55 @@ header {
   margin-bottom: 0.25rem;
 }
 
+/* Signed Out Navigation (Sign In/Register Buttons) */
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-buttons .nav-button {
+  padding: 8px 16px;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.nav-buttons .nav-button:hover {
+  background-color: #1e40af;
+}
+
+/* Signed In Navigation (Cart, Account, Logout) */
+#signed-in-nav {
+  display: flex;
+}
+
+#signed-in-nav ul {
+  display: flex;
+  gap: 1.5rem;
+}
+
+#signed-in-nav a {
+  text-decoration: none;
+  color: #4b5563;
+  font-size: 0.85rem;
+  transition: color 0.3s ease;
+}
+
+#signed-in-nav a:hover {
+  color: #2563eb;
+}
+
+/* Logout button styling */
+#logout-btn {
+  cursor: pointer;
+}
+
+/* #logout-btn:hover {
+} */
+
 /* Hamburger menu styling */
 .hamburger-menu {
   display: none;
@@ -323,7 +372,7 @@ header {
   font-size: 30px;
 }
 
-/* Center the auth container */
+/* auth container */
 .auth-container {
   max-width: 400px;
   margin: 100px auto;
@@ -331,7 +380,6 @@ header {
   text-align: center;
   background: #ffffff;
   border-radius: 8px;
-  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
 }
 
 .auth-title {
