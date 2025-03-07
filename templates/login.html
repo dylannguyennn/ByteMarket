@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | ByteMarket</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/styles.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="navbar-container">
+        <div class="logo">
+          <h1><a href="{{ url_for('home') }}">ByteMarket</a></h1>
+        </div>
+      </div>
+    </header>
+
+    <main class="auth-container">
+      <h2 class="auth-title">Sign In</h2>
+
+      <!-- Flash Messages for errors -->
+      {% with messages = get_flashed_messages(with_categories=True) %} {% if
+      messages %}
+      <div class="flash-messages">
+        {% for category, message in messages %}
+        <p class="flash-{{ category }}">{{ message }}</p>
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %}
+
+      <form class="auth-form" method="POST">
+        {{ form.hidden_tag() }}
+        <!-- CSRF Token -->
+
+        <!-- Email Field -->
+        <label for="email">{{ form.email.label }}</label>
+        {{ form.email(class="auth-input") }} {% if form.email.errors %}
+        <p class="error-message">{{ form.email.errors[0] }}</p>
+        {% endif %}
+
+        <!-- Password Field -->
+        <label for="password">{{ form.password.label }}</label>
+        {{ form.password(class="auth-input") }} {% if form.password.errors %}
+        <p class="error-message">{{ form.password.errors[0] }}</p>
+        {% endif %}
+
+        <button type="submit" class="auth-button">Sign In</button>
+      </form>
+
+      <p class="auth-switch">
+        Don't have an account? <a href="{{ url_for('register') }}">Register</a>
+      </p>
+    </main>
+  </body>
+</html>

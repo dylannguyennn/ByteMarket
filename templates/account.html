@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Account | ByteMarket</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/styles.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="navbar-container">
+        <div class="logo">
+          <h1><a href="{{ url_for('home') }}">ByteMarket</a></h1>
+        </div>
+      </div>
+    </header>
+
+    <main class="account-container">
+      <h2>My Account</h2>
+
+      <div class="account-details">
+        <p><strong>Username:</strong> {{ current_user.username }}</p>
+        <p><strong>Email:</strong> {{ current_user.email }}</p>
+      </div>
+
+      <div class="account-actions">
+        <a href="{{ url_for('edit_account') }}" class="btn">Edit Profile</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-logout">Logout</a>
+      </div>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>

@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shopping Cart - ByteMarket</title>
-    <link rel="stylesheet" href="styles/styles.css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/styles.css') }}"
+    />
     <script
       src="https://kit.fontawesome.com/e5e14bbee1.js"
       crossorigin="anonymous"
@@ -62,8 +65,17 @@
 
     <footer></footer>
 
-    <script defer src="scripts/hamburger.js"></script>
-    <script defer src="scripts/auth.js"></script>
-    <script defer src="scripts/cart.js"></script>
+    <script
+      defer
+      src="{{ url_for('static', filename='scripts/hamburger.js') }}"
+    ></script>
+    <script
+      defer
+      src="{{ url_for('static', filename='scripts/auth.js') }}"
+    ></script>
+    <script
+      defer
+      src="{{ url_for('static', filename='scripts/cart.js') }}"
+    ></script>
   </body>
 </html>

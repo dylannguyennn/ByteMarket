@@ -123,13 +123,13 @@ header {
 }
 
 .nav-buttons .nav-button {
-  padding: 8px 16px;
-  background-color: #2563eb;
-  color: white;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background 0.3s ease;
+  /* padding: 8px 16px; */
+  /* background-color: #2563eb; */
+  /* color: white; */
+  /* border-radius: 5px; */
+  /* text-decoration: none; */
+  /* font-weight: 600; */
+  /* transition: background 0.3s ease; */
 }
 
 .nav-buttons .nav-button:hover {
@@ -509,4 +509,77 @@ header {
 
 .checkout-button:hover {
   background-color: #1e40af;
+}
+
+/* Account Page Styles */
+.account-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.account-details p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.account-actions {
+  margin-top: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  background: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.btn-logout {
+  background: #e74c3c;
+}
+
+/* Edit Account Page Styles */
+.auth-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.auth-button {
+  background: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.auth-button:hover {
+  background: #2980b9;
+}
+
+.auth-switch a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
 }

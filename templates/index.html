@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ByteMarket</title>
-    <link rel="stylesheet" href="styles/styles.css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/styles.css') }}"
+    />
     <script
       src="https://kit.fontawesome.com/e5e14bbee1.js"
       crossorigin="anonymous"
@@ -23,34 +26,39 @@
           </button>
         </div>
 
-        <!-- Navigation for Signed-Out Users -->
-        <div class="nav-buttons" id="signed-out-nav">
-          <a href="login.html" class="nav-button">Sign In</a>
-          <a href="register.html" class="nav-button">Register</a>
-        </div>
-
-        <!-- Navigation for Signed-In Users -->
-        <div class="nav-menu" id="signed-in-nav" style="display: none">
-          <ul>
-            <li>
-              <a href="cart.html" title="Cart">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span class="nav-text">Cart</span>
-              </a>
-            </li>
-            <li>
-              <a href="account.html" title="Account">
-                <i class="fa-solid fa-circle-user"></i>
-                <span class="nav-text">Account</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" id="logout-btn" title="Logout">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <span class="nav-text">Logout</span>
-              </a>
-            </li>
-          </ul>
+        <!-- Navigation -->
+        <div class="nav-buttons">
+          {% if current_user.is_authenticated %}
+          <!-- Signed-In User Navigation -->
+          <div class="nav-menu">
+            <ul>
+              <li>
+                <a href="{{ url_for('account') }}" title="Account">
+                  <i class="fa-solid fa-circle-user"></i>
+                  <span class="nav-text">Account</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ url_for('cart') }}" title="Cart">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                  <span class="nav-text">Cart</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ url_for('logout') }}" title="Logout">
+                  <i class="fa-solid fa-right-from-bracket"></i>
+                  <span class="nav-text">Logout</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          {% else %}
+          <!-- Signed-Out User Navigation -->
+          <div class="nav-buttons">
+            <a href="{{ url_for('login') }}">Sign In</a>
+            <a href="{{ url_for('register') }}">Register</a>
+          </div>
+          {% endif %}
         </div>
 
         <!-- For Mobile Responsiveness -->
@@ -92,7 +100,13 @@
     <footer></footer>
 
     <!-- External JavaScript Files -->
-    <script defer src="scripts/hamburger.js"></script>
-    <script defer src="scripts/auth.js"></script>
+    <script
+      defer
+      src="{{ url_for('static', filename='scripts/hamburger.js') }}"
+    ></script>
+    <script
+      defer
+      src="{{ url_for('static', filename='scripts/auth.js') }}"
+    ></script>
   </body>
 </html>

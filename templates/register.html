@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | ByteMarket</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/styles.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="navbar-container">
+        <div class="logo">
+          <h1><a href="{{ url_for('home') }}">ByteMarket</a></h1>
+        </div>
+      </div>
+    </header>
+
+    <main class="auth-container">
+      <h2 class="auth-title">Register</h2>
+      <form class="auth-form" method="POST">
+        {{ form.hidden_tag() }}
+
+        <label for="username">Username</label>
+        {{ form.username(class="form-input") }}
+
+        <label for="email">Email Address</label>
+        {{ form.email(class="form-input") }}
+
+        <label for="password">Password</label>
+        {{ form.password(class="form-input") }}
+
+        <label for="confirm_password">Confirm Password</label>
+        {{ form.confirm_password(class="form-input") }}
+
+        <button type="submit" class="auth-button">Register</button>
+      </form>
+
+      <p class="auth-switch">
+        Already have an account? <a href="{{ url_for('login') }}">Sign In</a>
+      </p>
+    </main>
+  </body>
+</html>
