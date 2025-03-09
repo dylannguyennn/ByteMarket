@@ -72,31 +72,39 @@
 
     <!-- Main content -->
     <main>
-      <section class="categories">
-        <div class="categories-container">
-          <h3>Categories</h3>
-          <div class="placeholder-categories">
-            <div class="placeholder-category"></div>
-            <div class="placeholder-category"></div>
-            <div class="placeholder-category"></div>
-            <div class="placeholder-category"></div>
+      <div class="product-container">
+        <div class="product-gallery">
+          <div class="product-main-image">
+            <img src="https://via.placeholder.com/500x400" alt="Product Image" />
+          </div>
+          <div class="product-thumbnails">
+            <img src="https://via.placeholder.com/100x100" alt="Thumbnail 1" class="thumbnail active" />
+            <img src="https://via.placeholder.com/100x100" alt="Thumbnail 2" class="thumbnail" />
+            <img src="https://via.placeholder.com/100x100" alt="Thumbnail 3" class="thumbnail" />
           </div>
         </div>
-      </section>
-
-      <!-- Placeholder content to demonstrate scrolling -->
-      <section class="products">
-        <div class="products-container">
-          <h3>Featured Products</h3>
-          <div class="placeholder-products">
-            <a href="{{ url_for('product') }}">
-              <div class="placeholder-product"></div>
-            </a>
-            <div class="placeholder-product"></div>
-            <div class="placeholder-product"></div>
+        <div class="product-details">
+          <h1 class="product-title">Premium Wireless Headphones</h1>
+          <div class="product-price">$129.99</div>
+          <div class="product-description">
+            <p>Experience crystal-clear sound with our premium wireless headphones. These headphones feature the latest Bluetooth technology, active noise cancellation, and a comfortable over-ear design for extended listening sessions.</p>
+            <p>With up to 30 hours of battery life and quick charging capabilities, you'll never have to worry about running out of power. The sleek, modern design makes these headphones perfect for both casual and professional use.</p>
           </div>
+          <div class="product-features">
+            <h3>Key Features:</h3>
+            <ul>
+              <li>Active noise cancellation</li>
+              <li>30-hour battery life</li>
+              <li>Bluetooth 5.0 connectivity</li>
+              <li>Comfortable memory foam ear cushions</li>
+              <li>Built-in microphone for calls</li>
+            </ul>
+          </div>
+          <button class="add-to-cart-button">
+            <i class="fa-solid fa-cart-plus"></i> Add to Cart
+          </button>
         </div>
-      </section>
+      </div>
     </main>
 
     <footer></footer>

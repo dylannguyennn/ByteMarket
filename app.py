@@ -102,6 +102,12 @@ def edit_account():
 def cart():
     return render_template("cart.html")  # Ensure cart.html exists in /templates
 
+# Route: Product Page
+# Route URL is temporary; needs to be modified to include product ID
+@app.route("/product")
+def product():
+    return render_template("product.html")
+
 if __name__ == "__main__":
 
     app.run(debug=True)
