@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shopping Cart - ByteMarket</title>
+    <title>ByteMarket</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='/styles.css') }}"
@@ -39,9 +39,9 @@
                 </a>
               </li>
               <li>
-                <a href="{{ url_for('home') }}" title="Cart">
-                  <i class="fa-solid fa-house"></i>
-                  <span class="nav-text">Home</span>
+                <a href="{{ url_for('cart') }}" title="Cart">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                  <span class="nav-text">Cart</span>
                 </a>
               </li>
               <li>
@@ -70,19 +70,46 @@
       </div>
     </header>
 
-    <!-- Cart Section -->
-    <main class="cart-container">
-      <h2>Your Shopping Cart</h2>
-      <div class="cart-items" id="cart-items"></div>
-
-      <!-- Checkout Button -->
-      <button id="checkout-button" class="checkout-button" disabled>
-        Checkout
-      </button>
+    <!-- Main content -->
+    <main>
+      <div class="product-container">
+        <div class="product-gallery">
+          <div class="product-main-image">
+            <img src="https://via.placeholder.com/500x400" alt="Product Image" />
+          </div>
+          <div class="product-thumbnails">
+            <img src="https://via.placeholder.com/100x100" alt="Thumbnail 1" class="thumbnail active" />
+            <img src="https://via.placeholder.com/100x100" alt="Thumbnail 2" class="thumbnail" />
+            <img src="https://via.placeholder.com/100x100" alt="Thumbnail 3" class="thumbnail" />
+          </div>
+        </div>
+        <div class="product-details">
+          <h1 class="product-title">Premium Wireless Headphones</h1>
+          <div class="product-price">$129.99</div>
+          <div class="product-description">
+            <p>Experience crystal-clear sound with our premium wireless headphones. These headphones feature the latest Bluetooth technology, active noise cancellation, and a comfortable over-ear design for extended listening sessions.</p>
+            <p>With up to 30 hours of battery life and quick charging capabilities, you'll never have to worry about running out of power. The sleek, modern design makes these headphones perfect for both casual and professional use.</p>
+          </div>
+          <div class="product-features">
+            <h3>Key Features:</h3>
+            <ul>
+              <li>Active noise cancellation</li>
+              <li>30-hour battery life</li>
+              <li>Bluetooth 5.0 connectivity</li>
+              <li>Comfortable memory foam ear cushions</li>
+              <li>Built-in microphone for calls</li>
+            </ul>
+          </div>
+          <button class="add-to-cart-button">
+            <i class="fa-solid fa-cart-plus"></i> Add to Cart
+          </button>
+        </div>
+      </div>
     </main>
 
     <footer></footer>
 
+    <!-- External JavaScript Files -->
     <script
       defer
       src="{{ url_for('static', filename='scripts/hamburger.js') }}"
@@ -90,10 +117,6 @@
     <script
       defer
       src="{{ url_for('static', filename='scripts/auth.js') }}"
-    ></script>
-    <script
-      defer
-      src="{{ url_for('static', filename='scripts/cart.js') }}"
     ></script>
   </body>
 </html>

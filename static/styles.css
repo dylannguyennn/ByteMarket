@@ -444,6 +444,133 @@ header {
   text-decoration: underline;
 }
 
+/* Product Page Styles */
+.product-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  display: flex;
+  gap: 3rem;
+}
+
+.product-gallery {
+  flex: 1;
+  max-width: 500px;
+}
+
+.product-main-image {
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-main-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.product-thumbnails {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.thumbnail.active {
+  border-color: #2563eb;
+}
+
+.thumbnail:hover {
+  transform: translateY(-2px);
+}
+
+.product-details {
+  flex: 1;
+}
+
+.product-title {
+  font-size: 2rem;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2563eb;
+  margin-bottom: 1.5rem;
+}
+
+.product-description {
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.product-description p {
+  margin-bottom: 1rem;
+}
+
+.product-features {
+  margin-bottom: 2rem;
+}
+
+.product-features h3 {
+  font-size: 1.2rem;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.product-features ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.product-features li {
+  color: #4b5563;
+  margin-bottom: 0.5rem;
+}
+
+.add-to-cart-button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-button:hover {
+  background-color: #1e40af;
+}
+
+/* Responsive adjustments for product page */
+@media (max-width: 768px) {
+  .product-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .product-gallery {
+    max-width: 100%;
+  }
+}
+
 /* Cart Page Styles */
 .cart-container {
   max-width: 800px;
