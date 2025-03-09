@@ -25,30 +25,48 @@
             <i class="fa-solid fa-search"></i>
           </button>
         </div>
-        <nav class="nav-menu">
-          <ul>
-            <li>
-              <a href="index.html" title="Home">
-                <i class="fa-solid fa-house"></i>
-                <span class="nav-text">Home</span>
-              </a>
-            </li>
-            <li>
-              <a href="cart.html" title="Cart">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span class="nav-text"
-                  >Cart (<span id="cart-count">0</span>)</span
-                >
-              </a>
-            </li>
-            <li>
-              <a href="account.html" title="Account">
-                <i class="fa-solid fa-circle-user"></i>
-                <span class="nav-text">Account</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+          {% if current_user.is_authenticated %}
+          <!-- Signed-In User Navigation -->
+          <div class="nav-menu">
+            <ul>
+              <li>
+                <a href="{{ url_for('account') }}" title="Account">
+                  <i class="fa-solid fa-circle-user"></i>
+                  <span class="nav-text">Account</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ url_for('home') }}" title="Cart">
+                  <i class="fa-solid fa-house"></i>
+                  <span class="nav-text">Home</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ url_for('logout') }}" title="Logout">
+                  <i class="fa-solid fa-right-from-bracket"></i>
+                  <span class="nav-text">Logout</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          {% else %}
+          <!-- Signed-Out User Navigation -->
+          <div class="nav-buttons">
+            <a href="{{ url_for('login') }}">Sign In</a>
+            <a href="{{ url_for('register') }}">Register</a>
+          </div>
+          {% endif %}
+        </div>
+
+        <!-- For Mobile Responsiveness -->
+        <button class="hamburger-menu" aria-label="Toggle menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
       </div>
     </header>
 
