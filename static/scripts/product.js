@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
           },
           body: JSON.stringify({
             product_id: productId,
-            quantity: 1 // Default to 1, you could add a quantity selector
+            quantity: 1 // Default is 1; add a quantity selector?
           })
         });
         
@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
           // Show success message
           showNotification('Product added to cart!', 'success');
           
-          // Could update cart icon count here if you have one
           updateCartCount();
         } else {
           showNotification('Error adding product to cart: ' + data.message, 'error');
@@ -81,11 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const data = await response.json();
         
-        // If you have a cart icon with a count badge, update it
+        // TODO: Add cart count badge 
         const cartItems = data.cart_items || [];
         const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
         
-        // Update any cart count displays
         const cartCountElements = document.querySelectorAll('.cart-count');
         cartCountElements.forEach(element => {
           element.textContent = totalItems;

@@ -81,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     cartItemsContainer.innerHTML = cartHTML;
     
-    // Add event listeners for quantity buttons and remove buttons
     addCartItemEventListeners();
   }
   
@@ -94,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   
-  // Add event listeners to cart item buttons
+  // Cart update handling
   function addCartItemEventListeners() {
     // Get all cart items
     const cartItems = document.querySelectorAll('.cart-item');
@@ -106,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const removeBtn = item.querySelector('.remove-item-btn');
       const quantityElement = item.querySelector('.quantity');
       
-      // Add event listener for decrease button
+      // Decrease button handling
       decreaseBtn.addEventListener('click', async () => {
         let currentQuantity = parseInt(quantityElement.textContent);
         if (currentQuantity > 1) {
@@ -133,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
       
-      // Add event listener for increase button
+      // Increase button handling
       increaseBtn.addEventListener('click', async () => {
         let currentQuantity = parseInt(quantityElement.textContent);
         try {
@@ -158,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
       
-      // Add event listener for remove button
+      // Remove button handling
       removeBtn.addEventListener('click', async () => {
         try {
           const response = await fetch(`/api/cart/remove/${itemId}`, {
