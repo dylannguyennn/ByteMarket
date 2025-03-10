@@ -10,11 +10,35 @@ app.config['SECRET_KEY'] = 'supersecretkey'  # Change in production
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'  # SQLite database
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# Function to populate database with sample products
+def create_sample_products():
+    if Product.query.first():
+        return
+
+    products = [
+        Product(
+            name="Premium Wireless Headphones",
+            description="Experience crystal-clear sound with our premium wireless headphones. These headphones feature the latest Bluetooth technology, active noise cancellation, and a comfortable over-ear design for extended listening sessions.",
+            price=129.99,
+            image_url="https://via.placeholder.com/500x400"
+        )
+    ]
+
+    for product in products:
+        db.session.add(product)
+
+    db.session.commit()
+    print("Sample products created...")
+    
 db.init_app(app)  # Initialize db AFTER creating app
 bcrypt = Bcrypt(app)  # Initialize Bcrypt
 login_manager = LoginManager(app)
 login_manager.login_view = "login"  # Redirect unauthorized users to login
 
+with app.app_context():
+    db.create_all()
+    create_sample_products()
+    
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))  # Fetch user by ID
