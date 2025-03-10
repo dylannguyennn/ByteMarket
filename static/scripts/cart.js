@@ -6,6 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
   async function loadCartItems() {
     try {
       const response = await fetch('/api/cart');
+      
+      // Check if response is a redirect to login page (status 401 or 403)
+      if (response.status === 401 || response.status === 403) {
+        cartItemsContainer.innerHTML = '<p>Please <a href="/login">log in</a> to view your cart.</p>';
+        if (checkoutButton) {
+          checkoutButton.disabled = true;
+        }
+        return;
+      }
+      
       const data = await response.json();
       
       if (data.success) {

@@ -34,6 +34,8 @@ db.init_app(app)  # Initialize db AFTER creating app
 bcrypt = Bcrypt(app)  # Initialize Bcrypt
 login_manager = LoginManager(app)
 login_manager.login_view = "login"  # Redirect unauthorized users to login
+login_manager.login_message = "Please log in to access this page."
+login_manager.login_message_category = "info"
 
 with app.app_context():
     db.create_all()
@@ -48,7 +50,8 @@ def load_user(user_id):
 def home():
     if current_user.is_authenticated:
         return render_template("index.html")  # Load the signed-in homepage
-    return render_template("index.html")  # Load the guest homepage
+    else:
+        return render_template("index.html")  # Load the guest homepage
 
 # Route: Register
 @app.route("/register", methods=["GET", "POST"])
@@ -134,6 +137,7 @@ def product(product_id):
 
 # API to add product to cart
 @app.route("/api/cart/add", methods=["POST"])
+@login_required
 def add_to_cart():
     data = request.get_json()
     product_id = data.get("product_id")

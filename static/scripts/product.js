@@ -22,6 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
           })
         });
         
+        // Check if response is a redirect to login page (status 401 or 403)
+        if (response.status === 401 || response.status === 403) {
+          showNotification('Please log in to add items to your cart', 'error');
+          // Redirect to login page after a short delay
+          setTimeout(() => {
+            window.location.href = '/login';
+          }, 2000);
+          return;
+        }
+        
         const data = await response.json();
         
         if (data.success) {
@@ -62,6 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
     async function updateCartCount() {
       try {
         const response = await fetch('/api/cart');
+        
+        // Check if response is a redirect to login page (status 401 or 403)
+        if (response.status === 401 || response.status === 403) {
+          // User is not logged in, don't show error, just don't update cart count
+          return;
+        }
+        
         const data = await response.json();
         
         // If you have a cart icon with a count badge, update it
