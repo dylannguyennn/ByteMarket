@@ -17,7 +17,7 @@ def create_sample_products():
 
     products = [
         Product(
-            name="Premium Wireless Headphones",
+            product_name="Premium Wireless Headphones",
             description="Experience crystal-clear sound with our premium wireless headphones. These headphones feature the latest Bluetooth technology, active noise cancellation, and a comfortable over-ear design for extended listening sessions.",
             price=129.99,
             image_url="https://via.placeholder.com/500x400"
@@ -38,7 +38,7 @@ login_manager.login_view = "login"  # Redirect unauthorized users to login
 with app.app_context():
     db.create_all()
     create_sample_products()
-    
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))  # Fetch user by ID
@@ -168,7 +168,7 @@ def get_cart():
         cart_data.append({
             "id": item.id,
             "product_id": item.product_id,
-            "name": item.product.name,
+            "name": item.product.product_name,
             "price": item.product.price,
             "quantity": item.quantity,
             "total": item.product.price * item.quantity,
