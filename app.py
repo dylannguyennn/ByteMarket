@@ -1,9 +1,9 @@
-from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, flash, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from forms import RegistrationForm, LoginForm  # Import LoginForm
-from models import db, User
+from models import db, User, Product, CartItem
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecretkey'  # Change in production
@@ -103,10 +103,55 @@ def cart():
     return render_template("cart.html")  # Ensure cart.html exists in /templates
 
 # Route: Product Page
-# Route URL is temporary; needs to be modified to include product ID
-@app.route("/product")
-def product():
-    return render_template("product.html")
+@app.route("/product/<int:product_id>")
+def product(product_id):
+    product = Product.query.get_or_404(product_id)
+    return render_template("product.html", product=product)
+
+# API to add product to cart
+@app.route("/api/cart/add", methods=["POST"])
+def add_to_cart():
+    data = request.get_json()
+    product_id = data.get("product_id")
+    quantity = data.get("quantity", 1)
+
+    product = Product.query.get(product_id)
+    if not product:
+        return jsonify({"success": False, "message": "Product not found"}), 404
+    
+    cart_item = CartItem.query.filter_by(
+        user_id=current_user.id,
+        product_id=product_id
+    ).first()
+
+    if cart_item:
+        cart_item.quantity += quantity
+    else:
+        cart_item = CartItem(user_id=current_user.id, product_id=product_id, quantity=quantity)
+        db.session.add(cart_item)
+
+    db.session.commit()
+    return jsonify({"success": True, "message": "Item added to cart"})
+
+# API to get cart items (i.e when on cart page)
+@app.route("/api/cart", methods=["GET"])
+@login_required
+def get_cart():
+    cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
+    cart_data = []
+
+    for item in cart_items:
+        cart_data.append({
+            "id": item.id,
+            "product_id": item.product_id,
+            "name": item.product.name,
+            "price": item.product.price,
+            "quantity": item.quantity,
+            "total": item.product.price * item.quantity,
+            "image_url": item.product.image_url
+        })
+    
+    return jsonify({"success": True, "cart_items": cart_data})
 
 if __name__ == "__main__":
 
