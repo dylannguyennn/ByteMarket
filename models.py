@@ -24,7 +24,7 @@ class User(db.Model, UserMixin):
     
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    product_name = db.Column(db.string(200), nullable=False)
+    product_name = db.Column(db.String(200), nullable=False)
     description = db.Column(db.Text, nullable=False)
     price = db.Column(db.Float, nullable=False)
     image_url = db.Column(db.String(255), nullable=True) # Temporary; replace with actual image later
