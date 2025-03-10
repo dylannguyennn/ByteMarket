@@ -84,23 +84,12 @@
           </div>
         </div>
         <div class="product-details">
-          <h1 class="product-title">Premium Wireless Headphones</h1>
-          <div class="product-price">$129.99</div>
+          <h1 class="product-title">{{ product.name }}</h1>
+          <div class="product-price">${{ "%.2f"|format(product.price) }}</div>
           <div class="product-description">
-            <p>Experience crystal-clear sound with our premium wireless headphones. These headphones feature the latest Bluetooth technology, active noise cancellation, and a comfortable over-ear design for extended listening sessions.</p>
-            <p>With up to 30 hours of battery life and quick charging capabilities, you'll never have to worry about running out of power. The sleek, modern design makes these headphones perfect for both casual and professional use.</p>
+            <p>{{ product.description }}</p>
           </div>
-          <div class="product-features">
-            <h3>Key Features:</h3>
-            <ul>
-              <li>Active noise cancellation</li>
-              <li>30-hour battery life</li>
-              <li>Bluetooth 5.0 connectivity</li>
-              <li>Comfortable memory foam ear cushions</li>
-              <li>Built-in microphone for calls</li>
-            </ul>
-          </div>
-          <button class="add-to-cart-button">
+          <button class="add-to-cart-button" id="add-to-cart" data-product-id="{{ product.id }}">
             <i class="fa-solid fa-cart-plus"></i> Add to Cart
           </button>
         </div>
