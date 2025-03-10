@@ -181,6 +181,47 @@ def get_cart():
     
     return jsonify({"success": True, "cart_items": cart_data})
 
+# API to update cart item quantity
+@app.route("/api/cart/update/<int:item_id>", methods=["POST"])
+@login_required
+def update_cart_item(item_id):
+    data = request.get_json()
+    quantity = data.get("quantity", 1)
+    
+    # Ensure quantity is at least 1
+    if quantity < 1:
+        return jsonify({"success": False, "message": "Quantity must be at least 1"}), 400
+    
+    cart_item = CartItem.query.filter_by(
+        id=item_id,
+        user_id=current_user.id
+    ).first()
+    
+    if not cart_item:
+        return jsonify({"success": False, "message": "Item not found in cart"}), 404
+    
+    cart_item.quantity = quantity
+    db.session.commit()
+    
+    return jsonify({"success": True, "message": "Cart updated successfully"})
+
+# API to remove item from cart
+@app.route("/api/cart/remove/<int:item_id>", methods=["DELETE"])
+@login_required
+def remove_from_cart(item_id):
+    cart_item = CartItem.query.filter_by(
+        id=item_id,
+        user_id=current_user.id
+    ).first()
+    
+    if not cart_item:
+        return jsonify({"success": False, "message": "Item not found in cart"}), 404
+    
+    db.session.delete(cart_item)
+    db.session.commit()
+    
+    return jsonify({"success": True, "message": "Item removed from cart"})
+
 if __name__ == "__main__":
 
     app.run(debug=True)

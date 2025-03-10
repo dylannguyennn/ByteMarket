@@ -96,8 +96,88 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Add event listeners to cart item buttons
   function addCartItemEventListeners() {
-    // Implementation for quantity buttons and remove buttons
-    // (This would be additional code to handle these actions)
+    // Get all cart items
+    const cartItems = document.querySelectorAll('.cart-item');
+    
+    cartItems.forEach(item => {
+      const itemId = item.dataset.itemId;
+      const decreaseBtn = item.querySelector('.decrease');
+      const increaseBtn = item.querySelector('.increase');
+      const removeBtn = item.querySelector('.remove-item-btn');
+      const quantityElement = item.querySelector('.quantity');
+      
+      // Add event listener for decrease button
+      decreaseBtn.addEventListener('click', async () => {
+        let currentQuantity = parseInt(quantityElement.textContent);
+        if (currentQuantity > 1) {
+          try {
+            const response = await fetch(`/api/cart/update/${itemId}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ quantity: currentQuantity - 1 })
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+              // Update the UI
+              loadCartItems();
+            } else {
+              console.error('Error updating quantity:', data.message);
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        }
+      });
+      
+      // Add event listener for increase button
+      increaseBtn.addEventListener('click', async () => {
+        let currentQuantity = parseInt(quantityElement.textContent);
+        try {
+          const response = await fetch(`/api/cart/update/${itemId}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ quantity: currentQuantity + 1 })
+          });
+          
+          const data = await response.json();
+          
+          if (data.success) {
+            // Update the UI
+            loadCartItems();
+          } else {
+            console.error('Error updating quantity:', data.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      });
+      
+      // Add event listener for remove button
+      removeBtn.addEventListener('click', async () => {
+        try {
+          const response = await fetch(`/api/cart/remove/${itemId}`, {
+            method: 'DELETE'
+          });
+          
+          const data = await response.json();
+          
+          if (data.success) {
+            // Update the UI
+            loadCartItems();
+          } else {
+            console.error('Error removing item:', data.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      });
+    });
   }
   
   // Load cart items when page loads
