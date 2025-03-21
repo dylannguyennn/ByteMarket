@@ -17,9 +17,9 @@ def create_sample_products():
 
     products = [
         Product(
-            product_name="Premium Wireless Headphones",
-            description="Experience crystal-clear sound with our premium wireless headphones. These headphones feature the latest Bluetooth technology, active noise cancellation, and a comfortable over-ear design for extended listening sessions.",
-            price=129.99,
+            product_name="Cat Phone Icons",
+            description="Give your device a fresh look with our awesome icon and wallpaper set for iOS, iPadOS, and Android! This digital download includes 126 stunning icons covering a range of popular apps that can be used to customize any app on your device. You'll get high-resolution PNG files designed for both mobile phones and tablets, so your screens will look fantastic no matter what device you’re using!",
+            price=9.99,
             image_url="https://via.placeholder.com/500x400"
         )
     ]
