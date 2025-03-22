@@ -17,7 +17,7 @@
     <header>
       <div class="navbar-container">
         <div class="logo">
-          <h1>ByteMarket</h1>
+          <a href="/"><h1>ByteMarket</h1></a>
         </div>
         <div class="search-container">
           <input type="search" placeholder="Search for something..." />
@@ -84,11 +84,13 @@
           </div> -->
         </div>
         <div class="product-details">
-          <h1 class="product-title">{{ product.name }}</h1>
+          <div class="product-header">
+            <h1 class="product-title">{{ product.product_name }}</h1>
+            <div class="product-price">${{ "%.2f"|format(product.price) }}</div>
+          </div>
           <div class="product-description">
             <p>{{ product.description }}</p>
           </div>
-          <div class="product-price">${{ "%.2f"|format(product.price) }}</div>
           <button class="add-to-cart-button" id="add-to-cart" data-product-id="{{ product.id }}">
             <i class="fa-solid fa-cart-plus"></i> Add to Cart
           </button>
