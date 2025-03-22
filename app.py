@@ -36,6 +36,13 @@ def create_sample_products():
             price=29.99,
             image_path="product_images/ebook.png",
             category="ebooks"
+        ),
+        Product(
+            product_name="Art Sample #1",
+            description="Sample description.",
+            price=9.99,
+            image_path="product_images/art1.png",
+            category="art"
         )
     ]
 
@@ -63,10 +70,11 @@ def load_user(user_id):
 # Route: Main Page
 @app.route("/")
 def home():
+    products = Product.query.all()
     if current_user.is_authenticated:
-        return render_template("index.html")  # Load the signed-in homepage
+        return render_template("index.html", products=products)  # Load the signed-in homepage
     else:
-        return render_template("index.html")  # Load the guest homepage
+        return render_template("index.html", products=products)  # Load the guest homepage
 
 
 @app.route("/api/search", methods=["GET"])
@@ -88,6 +96,12 @@ def search_products():
         })
     
     return jsonify({"success": True, "results": results, "count": len(results)})
+
+# Route: Category Page
+@app.route("/category/<category_name>")
+def category(category_name):
+    products = Product.query.filter_by(category=category_name).all()
+    return render_template("_products.html", products=products)
 
 # Route: Register
 @app.route("/register", methods=["GET", "POST"])
