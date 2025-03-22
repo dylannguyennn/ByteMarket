@@ -328,11 +328,34 @@ header {
   gap: 2rem;
 }
 
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .placeholder-category {
   height: 100px;
   width: 100px;
   background-color: #e5e7eb;
   border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-category img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.category-label {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #4b5563;
+  text-align: center;
 }
 
 .placeholder-product {

@@ -20,19 +20,22 @@ def create_sample_products():
             product_name="Cat Phone Icons",
             description="Give your device a fresh look with our awesome icon and wallpaper set for iOS, iPadOS, and Android! This digital download includes 126 stunning icons covering a range of popular apps that can be used to customize any app on your device. You'll get high-resolution PNG files designed for both mobile phones and tablets, so your screens will look fantastic no matter what device you’re using!",
             price=9.99,
-            image_path="product_images/cat_icons.png"
+            image_path="product_images/cat_icons.png",
+            category="art"
         ),
         Product(
             product_name="Cleaning Schedule Planner",
             description="This cleaning planner helps you plan and manage your household cleaning all year round! Use this schedule to keep track of all your hard to remember chores to make sure your home stays clean and organized and check off tasks as you do them.",
             price=4.99,
-            image_path="product_images/cleaning_planner.png"
+            image_path="product_images/cleaning_planner.png",
+            category="pdfs"
         ),
         Product(
             product_name="Cracking the Coding Interview e-Book",
             description="Cracking the Coding Interview is here to help you through this process, teaching you what you need to know and enabling you to perform at your very best. I've coached and interviewed hundreds of software engineers. The result is this book.Learn how to uncover the hints and hidden details in a question, discover how to break down a problem into manageable chunks, develop techniques to unstick yourself when stuck, learn (or re-learn) core computer science concepts, and practice on 189 interview questions and solutions.",
             price=29.99,
-            image_path="product_images/ebook.png"
+            image_path="product_images/ebook.png",
+            category="ebooks"
         )
     ]
 

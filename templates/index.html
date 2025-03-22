@@ -76,10 +76,30 @@
         <div class="categories-container">
           <h3>Categories</h3>
           <div class="placeholder-categories">
-            <div class="placeholder-category"></div>
-            <div class="placeholder-category"></div>
-            <div class="placeholder-category"></div>
-            <div class="placeholder-category"></div>
+            <div class="category-item">
+              <div class="placeholder-category">
+                <img src="{{ url_for('static', filename='category_images/category_art.png') }}" alt="Art Category">
+              </div>
+              <p class="category-label">Art</p>
+            </div>
+            <div class="category-item">
+              <div class="placeholder-category">
+                <img src="{{ url_for('static', filename='category_images/category_ebook.png') }}" alt="Ebook Category">
+              </div>
+              <p class="category-label">eBooks</p>
+            </div>
+            <div class="category-item">
+              <div class="placeholder-category">
+                <img src="{{ url_for('static', filename='category_images/category_egiftcard.png') }}" alt="Gift Card Category">
+              </div>
+              <p class="category-label">eGiftcards</p>
+            </div>
+            <div class="category-item">
+              <div class="placeholder-category">
+                <img src="{{ url_for('static', filename='category_images/category_pdf.png') }}" alt="PDF Category">
+              </div>
+              <p class="category-label">PDFs</p>
+            </div>
           </div>
         </div>
       </section>
