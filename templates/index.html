@@ -90,10 +90,20 @@
           <h3>Featured Products</h3>
           <div class="placeholder-products">
             <a href="{{ url_for('product', product_id=1) }}">
-              <div class="placeholder-product"></div>
+              <div class="placeholder-product">
+                <img src="{{ url_for('static', filename='product_images/cat_icons.png') }}" alt="Cat Phone Icons">
+              </div>
             </a>
-            <div class="placeholder-product"></div>
-            <div class="placeholder-product"></div>
+            <a href="{{ url_for('product', product_id=2) }}">
+              <div class="placeholder-product">
+                <img src="{{ url_for('static', filename='product_images/cleaning_planner.png') }}" alt="Cleaning Schedule">
+              </div>
+            </a>
+            <a href="{{ url_for('product', product_id=3) }}">
+              <div class="placeholder-product">
+                <img src="{{ url_for('static', filename='product_images/ebook.png') }}" alt="Cleaning Schedule">
+              </div> 
+            </a>
           </div>
         </div>
       </section>

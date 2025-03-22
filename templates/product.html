@@ -75,13 +75,13 @@
       <div class="product-container">
         <div class="product-gallery">
           <div class="product-main-image">
-            <img src="https://via.placeholder.com/500x400" alt="Product Image" />
+            <img src="{{ url_for('static', filename=product.image_path) }}" alt="Product Image" />
           </div>
-          <div class="product-thumbnails">
+          <!-- <div class="product-thumbnails">
             <img src="https://via.placeholder.com/100x100" alt="Thumbnail 1" class="thumbnail active" />
             <img src="https://via.placeholder.com/100x100" alt="Thumbnail 2" class="thumbnail" />
             <img src="https://via.placeholder.com/100x100" alt="Thumbnail 3" class="thumbnail" />
-          </div>
+          </div> -->
         </div>
         <div class="product-details">
           <h1 class="product-title">{{ product.name }}</h1>

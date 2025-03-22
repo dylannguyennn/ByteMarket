@@ -27,7 +27,7 @@ class Product(db.Model):
     product_name = db.Column(db.String(200), nullable=False)
     description = db.Column(db.Text, nullable=False)
     price = db.Column(db.Float, nullable=False)
-    image_url = db.Column(db.String(255), nullable=True) # Temporary; replace with actual image later
+    image_path = db.Column(db.String(255)) 
 
     def __repr__(self):
         return f"Product('{self.product_name}', '${self.price}')"
