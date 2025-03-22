@@ -385,12 +385,34 @@ header {
   color: black;
   text-align: center;
   margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .product-price {
   color: black;
   text-align: center;
   margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.search-results .placeholder-products a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-results .product-name {
+  color: black;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.search-results .product-price {
+  color: black;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 /* Responsive adjustments for content */

@@ -51,12 +51,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     <a href="/product/${product.id}">
                         <div class="placeholder-product">
                             <img src="/static/${product.image_path}" alt="${product.name}">
-                            <div class="product-info">
-                                <h4>${product.name}</h4>
-                                <p class="product-price">$${product.price.toFixed(2)}</p>
-                                <p class="product-description">${product.description}</p>
-                            </div>
                         </div>
+                        <h4>${product.name}</h4>
+                        <p class="product-price">$${product.price.toFixed(2)}</p>
                     </a>
                 `;
             });
