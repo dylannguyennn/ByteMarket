@@ -65,6 +65,27 @@ def home():
     else:
         return render_template("index.html")  # Load the guest homepage
 
+
+@app.route("/api/search", methods=["GET"])
+def search_products():
+    query = request.args.get("q", "")
+    if not query:
+        return jsonify({"success": False, "message": "No search query provided"}), 400
+    
+    products = Product.query.filter(Product.product_name.icontains(query)).all()
+
+    results = []
+    for product in products:
+        results.append({
+            "id": product.id,
+            "name": product.product_name,
+            "description": product.description[:100] + "..." if len(product.description) > 100 else product.description,
+            "price": product.price,
+            "image_path": product.image_path
+        })
+    
+    return jsonify({"success": True, "results": results, "count": len(results)})
+
 # Route: Register
 @app.route("/register", methods=["GET", "POST"])
 def register():

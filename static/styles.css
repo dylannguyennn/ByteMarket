@@ -818,3 +818,64 @@ header {
   justify-content: space-between;
   padding: 5px 0;
 }
+
+/* Search Results Styling */
+.search-results {
+  padding: 32px 0;
+}
+
+.search-results h3 {
+  font-size: 30px;
+  color: #1f2937;
+  margin-bottom: 16px;
+}
+
+.clear-search-btn {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+
+.clear-search-btn:hover {
+  background-color: #1e40af;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #6b7280;
+}
+
+.search-error {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #dc2626;
+}
+
+.product-info {
+  padding: 16px;
+}
+
+.product-info h4 {
+  font-size: 18px;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.product-price {
+  font-weight: bold;
+  color: #2563eb;
+  margin-bottom: 8px;
+}
+
+.product-description {
+  color: #6b7280;
+  font-size: 14px;
+}
