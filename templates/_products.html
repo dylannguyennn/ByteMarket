@@ -6,6 +6,8 @@
             <div class="placeholder-product">
                 <img src="{{ url_for('static', filename=product.image_path) }}" alt="{{ product.product_name }}">
             </div>
+            <p class="product-name">{{ product.product_name }}</p>
+            <p class="product-price">${{ product.price }}</p>
         </a>
         {% endfor %}
     </div>

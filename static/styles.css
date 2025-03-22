@@ -375,6 +375,24 @@ header {
   display: block;
 }
 
+.placeholder-products a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-name {
+  color: black;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.product-price {
+  color: black;
+  text-align: center;
+  margin-top: 5px;
+}
+
 /* Responsive adjustments for content */
 @media (max-width: 768px) {
   .hero {
