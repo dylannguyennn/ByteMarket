@@ -20,19 +20,29 @@ def create_sample_products():
             product_name="Cat Phone Icons",
             description="Give your device a fresh look with our awesome icon and wallpaper set for iOS, iPadOS, and Android! This digital download includes 126 stunning icons covering a range of popular apps that can be used to customize any app on your device. You'll get high-resolution PNG files designed for both mobile phones and tablets, so your screens will look fantastic no matter what device you’re using!",
             price=9.99,
-            image_path="product_images/cat_icons.png"
+            image_path="product_images/cat_icons.png",
+            category="art"
         ),
         Product(
             product_name="Cleaning Schedule Planner",
             description="This cleaning planner helps you plan and manage your household cleaning all year round! Use this schedule to keep track of all your hard to remember chores to make sure your home stays clean and organized and check off tasks as you do them.",
             price=4.99,
-            image_path="product_images/cleaning_planner.png"
+            image_path="product_images/cleaning_planner.png",
+            category="pdfs"
         ),
         Product(
             product_name="Cracking the Coding Interview e-Book",
             description="Cracking the Coding Interview is here to help you through this process, teaching you what you need to know and enabling you to perform at your very best. I've coached and interviewed hundreds of software engineers. The result is this book.Learn how to uncover the hints and hidden details in a question, discover how to break down a problem into manageable chunks, develop techniques to unstick yourself when stuck, learn (or re-learn) core computer science concepts, and practice on 189 interview questions and solutions.",
             price=29.99,
-            image_path="product_images/ebook.png"
+            image_path="product_images/ebook.png",
+            category="ebooks"
+        ),
+        Product(
+            product_name="Art Sample #1",
+            description="Sample description.",
+            price=9.99,
+            image_path="product_images/art1.png",
+            category="art"
         )
     ]
 
@@ -60,10 +70,11 @@ def load_user(user_id):
 # Route: Main Page
 @app.route("/")
 def home():
+    products = Product.query.all()
     if current_user.is_authenticated:
-        return render_template("index.html")  # Load the signed-in homepage
+        return render_template("index.html", products=products)  # Load the signed-in homepage
     else:
-        return render_template("index.html")  # Load the guest homepage
+        return render_template("index.html", products=products)  # Load the guest homepage
 
 
 @app.route("/api/search", methods=["GET"])
@@ -85,6 +96,12 @@ def search_products():
         })
     
     return jsonify({"success": True, "results": results, "count": len(results)})
+
+# Route: Category Page
+@app.route("/category/<category_name>")
+def category(category_name):
+    products = Product.query.filter_by(category=category_name).all()
+    return render_template("_products.html", products=products)
 
 # Route: Register
 @app.route("/register", methods=["GET", "POST"])
@@ -209,6 +226,7 @@ def get_cart():
             "price": item.product.price,
             "quantity": item.quantity,
             "total": item.product.price * item.quantity,
+            "image_url": "/static/" + item.product.image_path,
             "image_path": item.product.image_path
         })
     

@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
       
       if (data.success) {
+        console.log('Cart items:', data.cart_items);
         renderCartItems(data.cart_items);
         updateCheckoutButton(data.cart_items);
       } else {
@@ -43,10 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
     items.forEach(item => {
       totalPrice += item.total;
       
+      console.log('Item image URL:', item.image_url);
+      console.log('Item image path:', item.image_path);
       cartHTML += `
         <div class="cart-item" data-item-id="${item.id}">
           <div class="cart-item-image">
-            <img src="${item.image_url || 'https://via.placeholder.com/100x100'}" alt="${item.name}">
+            <img src="/static/${item.image_path}" alt="${item.name}">
           </div>
           <div class="cart-item-info">
             <h3>${item.name}</h3>

@@ -1,0 +1,14 @@
+<div class="products-container">
+    <h3 id="category-header">Featured Products</h3>
+    <div class="placeholder-products">
+        {% for product in products %}
+        <a href="{{ url_for('product', product_id=product.id) }}">
+            <div class="placeholder-product">
+                <img src="{{ url_for('static', filename=product.image_path) }}" alt="{{ product.product_name }}">
+            </div>
+            <p class="product-name">{{ product.product_name }}</p>
+            <p class="product-price">${{ product.price }}</p>
+        </a>
+        {% endfor %}
+    </div>
+</div>
