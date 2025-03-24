@@ -35,4 +35,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         });
     });
+
+    const addToCartButton = document.getElementById('add-to-cart');
+
+    if (addToCartButton) {
+        addToCartButton.addEventListener('click', function() {
+            const productId = this.dataset.productId;
+            console.log('Adding product to cart, product ID:', productId);
+
+            fetch('/api/cart/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ product_id: productId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Product added to cart!');
+                } else {
+                    alert('Failed to add product to cart.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while adding the product to cart.');
+            });
+        });
+    }
 });

@@ -226,6 +226,7 @@ def get_cart():
             "price": item.product.price,
             "quantity": item.quantity,
             "total": item.product.price * item.quantity,
+            "image_url": "/static/" + item.product.image_path,
             "image_path": item.product.image_path
         })
     
