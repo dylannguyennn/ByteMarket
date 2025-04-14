@@ -2,7 +2,8 @@ from flask import Flask, render_template, redirect, url_for, flash, jsonify, req
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from forms import RegistrationForm, LoginForm  
+from flask_migrate import Migrate 
+from forms import RegistrationForm, LoginForm
 from models import db, User, Product, CartItem
 
 app = Flask(__name__)
@@ -54,6 +55,7 @@ def create_sample_products():
     
 db.init_app(app)  # Initialize db AFTER creating app
 bcrypt = Bcrypt(app)  # Initialize Bcrypt
+migrate = Migrate(app, db) # Initialize Flask-Migrate
 login_manager = LoginManager(app)
 login_manager.login_view = "login"  # Redirect unauthorized users to login
 login_manager.login_message = "Please log in to access this page."

@@ -10,7 +10,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)  # Store hashed passwords
-
+    role = db.Column(db.String(10), nullable=False, default='default') # Roles: default, admin, seller
+    
     def set_password(self, password):
         """Hashes and sets the user's password."""
         self.password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
