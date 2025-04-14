@@ -30,6 +30,9 @@ class Product(db.Model):
     price = db.Column(db.Float, nullable=False)
     image_path = db.Column(db.String(255)) 
     category = db.Column(db.String(255), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) # Link to the user who uploaded
+
+    user = db.relationship('User', backref=db.backref('products', lazy=True)) # Establish relationship
 
     def __repr__(self):
         return f"Product('{self.product_name}', '${self.price}')"

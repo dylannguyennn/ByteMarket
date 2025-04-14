@@ -1,10 +1,12 @@
 from flask import Flask, render_template, redirect, url_for, flash, jsonify, request
+import os 
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_migrate import Migrate 
-from forms import RegistrationForm, LoginForm
+from forms import RegistrationForm, LoginForm, ProductForm 
 from models import db, User, Product, CartItem
+from werkzeug.utils import secure_filename 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecretkey'  # Change in production
@@ -22,28 +24,32 @@ def create_sample_products():
             description="Give your device a fresh look with our awesome icon and wallpaper set for iOS, iPadOS, and Android! This digital download includes 126 stunning icons covering a range of popular apps that can be used to customize any app on your device. You'll get high-resolution PNG files designed for both mobile phones and tablets, so your screens will look fantastic no matter what device you’re using!",
             price=9.99,
             image_path="product_images/cat_icons.png",
-            category="art"
+            category="art",
+            user_id=1
         ),
         Product(
             product_name="Cleaning Schedule Planner",
             description="This cleaning planner helps you plan and manage your household cleaning all year round! Use this schedule to keep track of all your hard to remember chores to make sure your home stays clean and organized and check off tasks as you do them.",
             price=4.99,
             image_path="product_images/cleaning_planner.png",
-            category="pdfs"
+            category="pdfs",
+            user_id=1
         ),
         Product(
             product_name="Cracking the Coding Interview e-Book",
             description="Cracking the Coding Interview is here to help you through this process, teaching you what you need to know and enabling you to perform at your very best. I've coached and interviewed hundreds of software engineers. The result is this book.Learn how to uncover the hints and hidden details in a question, discover how to break down a problem into manageable chunks, develop techniques to unstick yourself when stuck, learn (or re-learn) core computer science concepts, and practice on 189 interview questions and solutions.",
             price=29.99,
             image_path="product_images/ebook.png",
-            category="ebooks"
+            category="ebooks",
+            user_id=1
         ),
         Product(
             product_name="Art Sample #1",
             description="Sample description.",
             price=9.99,
             image_path="product_images/art1.png",
-            category="art"
+            category="art",
+            user_id=1
         )
     ]
 
@@ -78,7 +84,7 @@ def home():
     else:
         return render_template("index.html", products=products)  # Load the guest homepage
 
-
+# Route: Searching
 @app.route("/api/search", methods=["GET"])
 def search_products():
     query = request.args.get("q", "")
@@ -146,7 +152,6 @@ def logout():
     flash("You have been logged out.", "info")
     return redirect(url_for("home"))
 
-
 # Route: Account Page
 @app.route("/account")
 @login_required  # Ensures only logged-in users can access the account page
@@ -174,6 +179,48 @@ def edit_account():
     form.email.data = current_user.email
 
     return render_template("edit_account.html", form=form)
+
+# Route: Upload Product Page 
+@app.route("/upload_product", methods=["GET", "POST"])
+@login_required
+def upload_product():
+    if current_user.role not in ['seller', 'admin']:
+        flash("You do not have permission to access this page.", "danger")
+        return redirect(url_for('account'))  
+    
+    form = ProductForm() 
+
+    if form.validate_on_submit(): # Process form data on POST if valid
+        image_file = form.image.data
+        filename = secure_filename(image_file.filename)
+
+        # Define the path relative to the static folder
+        image_folder = os.path.join(app.static_folder, 'product_images')
+
+        # Create the directory if it doesn't exist
+        os.makedirs(image_folder, exist_ok=True)
+        image_path_full = os.path.join(image_folder, filename)
+        image_file.save(image_path_full)
+        
+        image_path_db = os.path.join('product_images', filename)
+
+        new_product = Product(
+            product_name=form.product_name.data,
+            description=form.description.data,
+            price=form.price.data,
+            category=form.category.data, 
+            image_path=image_path_db, 
+            user_id=current_user.id 
+        )
+
+        db.session.add(new_product)
+        db.session.commit()
+
+        flash("Product uploaded successfully!", "success")
+        return redirect(url_for('account')) 
+
+    # If GET request or form validation fails, render the template with the form
+    return render_template("upload_product.html", form=form)
 
 # Route: Cart Page
 @app.route("/cart")
