@@ -28,6 +28,9 @@
 
       <div class="account-actions">
         <a href="{{ url_for('edit_account') }}" class="btn">Edit Profile</a>
+        {% if current_user.role == 'seller' or current_user.role == 'admin' %}
+          <a href="{{ url_for('upload_product') }}" class="btn">Upload Product</a>
+        {% endif %}
         <a href="{{ url_for('logout') }}" class="btn btn-logout">Logout</a>
       </div>
     </main>

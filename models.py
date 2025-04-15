@@ -10,7 +10,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)  # Store hashed passwords
-
+    role = db.Column(db.String(10), nullable=False, default='default') # Roles: default, admin, seller
+    
     def set_password(self, password):
         """Hashes and sets the user's password."""
         self.password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
@@ -29,6 +30,9 @@ class Product(db.Model):
     price = db.Column(db.Float, nullable=False)
     image_path = db.Column(db.String(255)) 
     category = db.Column(db.String(255), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) # Link to the user who uploaded
+
+    user = db.relationship('User', backref=db.backref('products', lazy=True)) # Establish relationship
 
     def __repr__(self):
         return f"Product('{self.product_name}', '${self.price}')"

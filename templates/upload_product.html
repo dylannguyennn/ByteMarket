@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Product</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Upload New Product</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }} <!-- Include CSRF token -->
+
+        <div>
+            {{ form.product_name.label }}<br>
+            {{ form.product_name(size=30) }}<br>
+            {% for error in form.product_name.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+        </div>
+
+        <div>
+            {{ form.description.label }}<br>
+            {{ form.description(rows=5, cols=40) }}<br>
+            {% for error in form.description.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+        </div>
+
+        <div>
+            {{ form.price.label }}<br>
+            {{ form.price() }}<br>
+            {% for error in form.price.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+        </div>
+
+        <div>
+            {{ form.category.label }}<br>
+            {{ form.category(size=30) }}<br>
+            {% for error in form.category.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+        </div>
+
+        <div>
+            {{ form.image.label }}<br>
+            {{ form.image() }}<br>
+            {% for error in form.image.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+        </div>
+
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+</body>
+</html>
