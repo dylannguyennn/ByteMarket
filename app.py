@@ -45,10 +45,98 @@ def create_sample_products():
         ),
         Product(
             product_name="Art Sample #1",
-            description="Sample description.",
+            description="This is a sample art piece that showcases the artist's unique style and creativity. It is a digital download that can be printed and framed to add a touch of elegance to any room.",
             price=9.99,
             image_path="product_images/art1.png",
             category="art",
+            user_id=1
+        ),
+        Product(
+            product_name="Amazon Gift Card",
+            description="This Amazon gift card is a prepaid card that can be used to purchase products and services on Amazon.com. It is a convenient way to shop online without the need for a credit card or bank account.",
+            price=50.00,
+            image_path="product_images/amazon_gc.png",
+            category="egiftcards",
+            user_id=1
+        ),
+        Product(
+            product_name="Target Gift Card",
+            description="This Target gift card is a prepaid card that can be used to purchase products and services at Target stores or on their website. It is a convenient way to shop without the need for cash or credit cards.",
+            price=50.00,
+            image_path="product_images/target_gc.png",
+            category="egiftcards",
+            user_id=1
+        ),
+        Product(
+            product_name="Visa Gift Card",
+            description="This Visa gift card is a prepaid card that can be used to make purchases anywhere Visa is accepted. It is a convenient way to shop without the need for cash or credit cards.",
+            price=50.00,
+            image_path="product_images/visa_gc.png",
+            category="egiftcards",
+            user_id=1
+        ),
+        Product(
+            product_name="Prelude by Johann Sebastian Bach",
+            description="This is a Prelude by Johann Sebastian Bach, a famous composer from the Baroque period. It is a beautiful piece of music that is often played on the piano.",
+            price=1.99,
+            image_path="product_images/bach.svg",
+            category="music",
+            user_id=1
+        ),
+        Product(
+            product_name="Sonata by Ludwig van Beethoven",
+            description="This is a Sonata by Ludwig van Beethoven, a famous composer from the Classical period. It is a beautiful piece of music that is often played on the piano.",
+            price=1.99,
+            image_path="product_images/beet.svg",
+            category="music",
+            user_id=1
+        ),
+        Product(
+            product_name="Concerto by Wolfgang Amadeus Mozart",
+            description="This is a Concerto by Wolfgang Amadeus Mozart, a famous composer from the Classical period. It is a beautiful piece of music that is often played on the piano.",
+            price=1.99,
+            image_path="product_images/mozart.svg",
+            category="music",
+            user_id=1
+        ),
+        Product(
+            product_name="Biology Study Guide",
+            description="This is a Biology Study Guide, a comprehensive guide to the subject of biology. It covers all the major topics in biology and provides detailed explanations and examples.",
+            price=5.99,
+            image_path="product_images/biology.png",
+            category="pdfs",
+            user_id=1
+        ),
+        Product(
+            product_name="Calculus Study Guide",
+            description="This is a Calculus Study Guide, a comprehensive guide to the subject of calculus. It covers all the major topics in calculus and provides detailed explanations and examples.",
+            price=6.99,
+            image_path="product_images/calculus.png",
+            category="pdfs",
+            user_id=1
+        ),
+        Product(
+            product_name="Of Mice and Men",
+            description="Of Mice and Men is a novella written by John Steinbeck, published in 1937. It tells the story of two displaced migrant ranch workers who try to make a living during the Great Depression in California.",
+            price=12.99,
+            image_path="product_images/mice.svg",
+            category="ebooks",
+            user_id=1
+        ),
+        Product(
+            product_name="The Art of War",
+            description="The Art of War is an ancient Chinese military treatise attributed to Sun Tzu, a high-ranking military general, strategist, and tactician. It is composed of 13 chapters, each dedicated to a different aspect of warfare.",
+            price=13.99,
+            image_path="product_images/war.svg",
+            category="ebooks",
+            user_id=1
+        ),
+        Product(
+            product_name="Adventures of Huckleberry Finn",
+            description="Adventures of Huckleberry Finn is a novel written by Mark Twain, published in 1884. It is a sequel to The Adventures of Tom Sawyer and tells the story",
+            price=12.99,
+            image_path="product_images/huck.svg",
+            category="ebooks",
             user_id=1
         )
     ]
