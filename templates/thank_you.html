@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank You - ByteMarket</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/styles.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="navbar-container">
+        <div class="logo">
+          <a href="/"><h1>ByteMarket</h1></a>
+        </div>
+      </div>
+    </header>
+
+    <main class="thank-you-container">
+      <h2>Thank you for your purchase!</h2>
+      <p>Your digital goods will be emailed to:</p>
+      <p><strong>{{ email }}</strong></p>
+
+      <h3>Purchased Items:</h3>
+      <ul class="purchased-items">
+        {% for item in purchased_items %}
+        <li>
+          <strong>{{ item.name }}</strong> - ${{ "%.2f"|format(item.price) }} x {{ item.quantity }}
+          = ${{ "%.2f"|format(item.total) }}
+        </li>
+        {% endfor %}
+      </ul>
+
+      <p><strong>Total:</strong> ${{ "%.2f"|format(purchased_items|sum(attribute='total')) }}</p>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>

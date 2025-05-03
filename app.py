@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, flash, jsonify, request
 import os 
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql.expression import func
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_migrate import Migrate 
@@ -166,7 +167,8 @@ def load_user(user_id):
 # Route: Main Page
 @app.route("/")
 def home():
-    products = Product.query.all()
+    # Randomly select (6) featured products
+    products = Product.query.order_by(func.random()).limit(6).all()
     if current_user.is_authenticated:
         return render_template("index.html", products=products)  # Load the signed-in homepage
     else:
@@ -413,3 +415,57 @@ def remove_from_cart(item_id):
 if __name__ == "__main__":
 
     app.run(debug=True)
+
+# API for payment payment page
+@app.route("/payment", methods=["GET"])
+@login_required
+def payment():
+    return render_template("payment.html")
+
+# API to process payment
+@app.route("/process_payment", methods=["POST"])
+@login_required
+def process_payment():
+    email = request.form.get("email")
+    card_number = request.form.get("card_number")
+    expiry_date = request.form.get("expiry_date")
+    cvv = request.form.get("cvv")
+
+    # Backend validation
+    if not email or not card_number or not expiry_date or not cvv:
+        flash("All fields are required.", "danger")
+        return render_template("payment.html", email=email, card_number=card_number, expiry_date=expiry_date, cvv=cvv)
+
+    if not card_number.isdigit() or len(card_number) not in [15, 16]:
+        flash("Card number must be 15 or 16 digits.", "danger")
+        return render_template("payment.html", email=email, card_number=card_number, expiry_date=expiry_date, cvv=cvv)
+
+    if not expiry_date.isdigit() or len(expiry_date) != 4:
+        flash("Expiry date must be 4 digits (MMYY).", "danger")
+        return render_template("payment.html", email=email, card_number=card_number, expiry_date=expiry_date, cvv=cvv)
+
+    if not cvv.isdigit() or len(cvv) != 3:
+        flash("CVV must be 3 digits.", "danger")
+        return render_template("payment.html", email=email, card_number=card_number, expiry_date=expiry_date, cvv=cvv)
+
+    # Retrieve all items in the cart
+    cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
+
+    # Prepare cart data for the "Thank You" page
+    purchased_items = [
+        {
+            "name": item.product.product_name,
+            "price": item.product.price,
+            "quantity": item.quantity,
+            "total": item.product.price * item.quantity,
+        }
+        for item in cart_items
+    ]
+
+    # Clear the cart
+    for item in cart_items:
+        db.session.delete(item)
+    db.session.commit()
+
+    # Render the "Thank You" page with purchased items
+    return render_template("thank_you.html", email=email, purchased_items=purchased_items)

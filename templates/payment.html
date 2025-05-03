@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Details - ByteMarket</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/styles.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="navbar-container">
+        <div class="logo">
+          <a href="/"><h1>ByteMarket</h1></a>
+        </div>
+      </div>
+    </header>
+
+    <main class="payment-container">
+      <h2>Payment Details</h2>
+      <form action="{{ url_for('process_payment') }}" method="POST">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="card-number">Card Number</label>
+          <input
+            type="text"
+            id="card-number"
+            name="card_number"
+            placeholder="Enter your card number"
+            pattern="\d{15,16}"
+            title="Card number must be 15 or 16 digits"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="expiry-date">Expiry Date (MMYY)</label>
+          <input
+            type="text"
+            id="expiry-date"
+            name="expiry_date"
+            placeholder="MMYY"
+            pattern="\d{4}"
+            title="Expiry date must be 4 digits (MMYY)"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="cvv">CVV</label>
+          <input
+            type="text"
+            id="cvv"
+            name="cvv"
+            placeholder="Enter CVV"
+            pattern="\d{3}"
+            title="CVV must be 3 digits"
+            required
+          />
+        </div>
+        <button type="submit" class="checkout-button">Submit Payment</button>
+      </form>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>
