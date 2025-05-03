@@ -75,11 +75,12 @@
       <h2>Your Shopping Cart</h2>
       <div class="cart-items" id="cart-items"></div>
 
-      <!-- Checkout Button -->
-      <button id="checkout-button" class="checkout-button" disabled>
+    <!-- Checkout Button -->
+    <a href="{{ url_for('payment') }}">
+      <button id="checkout-button" class="checkout-button">
         Checkout
       </button>
-    </main>
+    </a>
 
     <footer></footer>
 

@@ -86,10 +86,12 @@
         <div class="product-details">
           <div class="product-header">
             <h1 class="product-title">{{ product.product_name }}</h1>
-            <div class="product-price">${{ "%.2f"|format(product.price) }}</div>
           </div>
           <div class="product-description">
             <p>{{ product.description }}</p>
+          </div>
+          <div class="product-header">
+            <div class="product-price">${{ "%.2f"|format(product.price) }}</div>
           </div>
           <button class="add-to-cart-button" id="add-to-cart" data-product-id="{{ product.id }}">
             <i class="fa-solid fa-cart-plus"></i> Add to Cart
