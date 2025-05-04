@@ -1,3 +1,4 @@
+<!-- templates/thank_you.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,7 +7,7 @@
     <title>Thank You - ByteMarket</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='/styles.css') }}"
+      href="{{ url_for('static', filename='styles.css') }}"
     />
   </head>
   <body>
@@ -20,20 +21,27 @@
 
     <main class="thank-you-container">
       <h2>Thank you for your purchase!</h2>
+
+      {% if email %}
       <p>Your digital goods will be emailed to:</p>
       <p><strong>{{ email }}</strong></p>
+      {% endif %}
 
       <h3>Purchased Items:</h3>
       <ul class="purchased-items">
         {% for item in purchased_items %}
         <li>
-          <strong>{{ item.name }}</strong> - ${{ "%.2f"|format(item.price) }} x {{ item.quantity }}
-          = ${{ "%.2f"|format(item.total) }}
+          <strong>{{ item.name }}</strong> — ${{ "%.2f"|format(item.price) }} ×
+          {{ item.quantity }} = ${{ "%.2f"|format(item.total) }}
         </li>
         {% endfor %}
       </ul>
 
-      <p><strong>Total:</strong> ${{ "%.2f"|format(purchased_items|sum(attribute='total')) }}</p>
+      <p>
+        <strong>Total:</strong> ${{
+        "%.2f"|format(purchased_items|sum(attribute='total')) }}
+      </p>
+      <a href="/" class="checkout-button">Return to Home</a>
     </main>
 
     <footer></footer>
