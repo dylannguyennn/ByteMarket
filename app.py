@@ -60,6 +60,11 @@ def home():
     products = Product.query.order_by(func.random()).limit(6).all()
     return render_template("index.html", products=products)
 
+@app.route("/category/<category_name>")
+def category(category_name):
+    products = Product.query.filter_by(category=category_name).all()
+    return render_template("_products.html", products=products)
+
 # Auth Routes
 @app.route("/register", methods=["GET", "POST"])
 def register():
