@@ -10,6 +10,7 @@ from models import db, User, Product, CartItem
 from werkzeug.utils import secure_filename
 import stripe
 from dotenv import load_dotenv
+from send_email import send_email
 
 # Load environment variables from .env
 load_dotenv()
@@ -47,6 +48,7 @@ def create_sample_products():
             description="Give your device a fresh look with our awesome icon and wallpaper set for iOS, iPadOS, and Android! This digital download includes 126 stunning icons covering a range of popular apps that can be used to customize any app on your device. You'll get high-resolution PNG files designed for both mobile phones and tablets, so your screens will look fantastic no matter what device you’re using!",
             price=9.99,
             image_path="product_images/cat_icons.png",
+            file_path="not_implemented_yet",
             category="art",
             user_id=1
         ),
@@ -55,6 +57,7 @@ def create_sample_products():
             description="This cleaning planner helps you plan and manage your household cleaning all year round! Use this schedule to keep track of all your hard to remember chores to make sure your home stays clean and organized and check off tasks as you do them.",
             price=4.99,
             image_path="product_images/cleaning_planner.png",
+            file_path="not_implemented_yet",
             category="pdfs",
             user_id=1
         ),
@@ -63,6 +66,7 @@ def create_sample_products():
             description="Cracking the Coding Interview is here to help you through this process, teaching you what you need to know and enabling you to perform at your very best. I've coached and interviewed hundreds of software engineers. The result is this book.Learn how to uncover the hints and hidden details in a question, discover how to break down a problem into manageable chunks, develop techniques to unstick yourself when stuck, learn (or re-learn) core computer science concepts, and practice on 189 interview questions and solutions.",
             price=29.99,
             image_path="product_images/ebook.png",
+            file_path="not_implemented_yet",
             category="ebooks",
             user_id=1
         ),
@@ -71,6 +75,7 @@ def create_sample_products():
             description="This is a sample art piece that showcases the artist's unique style and creativity. It is a digital download that can be printed and framed to add a touch of elegance to any room.",
             price=9.99,
             image_path="product_images/art1.png",
+            file_path="not_implemented_yet",
             category="art",
             user_id=1
         ),
@@ -79,6 +84,7 @@ def create_sample_products():
             description="This Amazon gift card is a prepaid card that can be used to purchase products and services on Amazon.com. It is a convenient way to shop online without the need for a credit card or bank account.",
             price=50.00,
             image_path="product_images/amazon_gc.png",
+            file_path="not_implemented_yet",
             category="egiftcards",
             user_id=1
         ),
@@ -87,6 +93,7 @@ def create_sample_products():
             description="This Target gift card is a prepaid card that can be used to purchase products and services at Target stores or on their website. It is a convenient way to shop without the need for cash or credit cards.",
             price=50.00,
             image_path="product_images/target_gc.png",
+            file_path="not_implemented_yet",
             category="egiftcards",
             user_id=1
         ),
@@ -95,6 +102,7 @@ def create_sample_products():
             description="This Visa gift card is a prepaid card that can be used to make purchases anywhere Visa is accepted. It is a convenient way to shop without the need for cash or credit cards.",
             price=50.00,
             image_path="product_images/visa_gc.png",
+            file_path="not_implemented_yet",
             category="egiftcards",
             user_id=1
         ),
@@ -103,6 +111,7 @@ def create_sample_products():
             description="This is a Prelude by Johann Sebastian Bach, a famous composer from the Baroque period. It is a beautiful piece of music that is often played on the piano.",
             price=1.99,
             image_path="product_images/bach.svg",
+            file_path="music/Bach_Book_I_Prelude_Fugue_No_E_Flat_Minor.mp3",
             category="music",
             user_id=1
         ),
@@ -111,6 +120,7 @@ def create_sample_products():
             description="This is a Sonata by Ludwig van Beethoven, a famous composer from the Classical period. It is a beautiful piece of music that is often played on the piano.",
             price=1.99,
             image_path="product_images/beet.svg",
+            file_path="music/Beethoven_Piano_Sonata_nr15_in_D_major.mp3",
             category="music",
             user_id=1
         ),
@@ -119,6 +129,7 @@ def create_sample_products():
             description="This is a Concerto by Wolfgang Amadeus Mozart, a famous composer from the Classical period. It is a beautiful piece of music that is often played on the piano.",
             price=1.99,
             image_path="product_images/mozart.svg",
+            file_path="music/Mozart_ Andante_from_Concerto_KV_467.mp3",
             category="music",
             user_id=1
         ),
@@ -127,6 +138,7 @@ def create_sample_products():
             description="This is a Biology Study Guide, a comprehensive guide to the subject of biology. It covers all the major topics in biology and provides detailed explanations and examples.",
             price=5.99,
             image_path="product_images/biology.png",
+            file_path="not_implemented_yet",
             category="pdfs",
             user_id=1
         ),
@@ -135,6 +147,7 @@ def create_sample_products():
             description="This is a Calculus Study Guide, a comprehensive guide to the subject of calculus. It covers all the major topics in calculus and provides detailed explanations and examples.",
             price=6.99,
             image_path="product_images/calculus.png",
+            file_path="not_implemented_yet",
             category="pdfs",
             user_id=1
         ),
@@ -143,6 +156,7 @@ def create_sample_products():
             description="Of Mice and Men is a novella written by John Steinbeck, published in 1937. It tells the story of two displaced migrant ranch workers who try to make a living during the Great Depression in California.",
             price=12.99,
             image_path="product_images/mice.svg",
+            file_path="ebooks/OfMiceAndMen.pdf",
             category="ebooks",
             user_id=1
         ),
@@ -151,6 +165,7 @@ def create_sample_products():
             description="The Art of War is an ancient Chinese military treatise attributed to Sun Tzu, a high-ranking military general, strategist, and tactician. It is composed of 13 chapters, each dedicated to a different aspect of warfare.",
             price=13.99,
             image_path="product_images/war.svg",
+            file_path="ebooks/The_Art_Of_War.pdf",
             category="ebooks",
             user_id=1
         ),
@@ -159,6 +174,7 @@ def create_sample_products():
             description="Adventures of Huckleberry Finn is a novel written by Mark Twain, published in 1884. It is a sequel to The Adventures of Tom Sawyer and tells the story",
             price=12.99,
             image_path="product_images/huck.svg",
+            file_path="ebooks/huckleberry.pdf",
             category="ebooks",
             user_id=1
         )
@@ -178,7 +194,7 @@ def home():
     products = Product.query.order_by(func.random()).limit(6).all()
     return render_template("index.html", products=products)
 
-# Route: Searching
+# Searching
 @app.route("/api/search", methods=["GET"])
 def search_products():
     query = request.args.get("q", "")
@@ -260,6 +276,7 @@ def edit_account():
     form.email.data = current_user.email
     return render_template("edit_account.html", form=form)
 
+# Seller Upload API
 @app.route("/upload_product", methods=["GET", "POST"])
 @login_required
 def upload_product():
@@ -280,6 +297,7 @@ def upload_product():
             price=form.price.data,
             category=form.category.data,
             image_path=path,
+            file_path=f"{form.category.data}/{form.product_name.data}",
             user_id=current_user.id
         )
         db.session.add(product)
@@ -293,6 +311,7 @@ def product(product_id):
     product = Product.query.get_or_404(product_id)
     return render_template("product.html", product=product)
 
+# Cart API Routes
 @app.route("/cart")
 @login_required
 def cart():
@@ -352,8 +371,7 @@ def remove_cart(item_id):
     db.session.commit()
     return jsonify(success=True)
 
-# --- Stripe Payment Routes ---
-
+#  Stripe Payment Routes 
 @app.route("/payment")
 @login_required
 def payment():
@@ -394,10 +412,26 @@ def create_checkout_session():
 @app.route("/thank_you")
 @login_required
 def thank_you():
-    # Optionally clear cart after Stripe webhook success
+    # Grab file paths to email files to user
+    cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
+    file_paths = [item.product.file_path for item in cart_items]
+    send_email(current_user.email, file_paths)
+
+    # Cart total
+    purchased_items = [
+        {
+            "name": item.product.product_name,
+            "price": item.product.price,
+            "quantity": item.quantity,
+            "total": item.product.price * item.quantity,
+        }
+        for item in cart_items
+    ]
+
+    # Delete items from user's cart
     CartItem.query.filter_by(user_id=current_user.id).delete()
     db.session.commit()
-    return render_template("thank_you.html")
+    return render_template("thank_you.html", purchased_items=purchased_items)
 
 # --- Run the App ---
 if __name__ == "__main__":
