@@ -8,6 +8,7 @@ from flask_migrate import Migrate
 from forms import RegistrationForm, LoginForm, ProductForm
 from models import db, User, Product, CartItem
 from werkzeug.utils import secure_filename
+from werkzeug.middleware.proxy_fix import ProxyFix
 import stripe
 from dotenv import load_dotenv
 from send_email import send_email
@@ -19,6 +20,10 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecretkey'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+app.wsgi_app = ProxyFix(
+    app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
+)
 
 # Stripe configuration
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
