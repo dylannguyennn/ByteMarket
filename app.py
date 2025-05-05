@@ -290,14 +290,14 @@ def upload_product():
         folder = os.path.join(app.static_folder, 'product_images')
         os.makedirs(folder, exist_ok=True)
         image.save(os.path.join(folder, filename))
-        path = os.path.join('product_images', filename)
+        path = os.path.join('product_images', filename).replace(os.sep, '/')
         product = Product(
             product_name=form.product_name.data,
             description=form.description.data,
             price=form.price.data,
             category=form.category.data,
             image_path=path,
-            file_path=f"{form.category.data}/{form.product_name.data}",
+            file_path=f"{form.category.data}/{form.product_name.data}", # Need to figure out how to add file extension at the end
             user_id=current_user.id
         )
         db.session.add(product)
